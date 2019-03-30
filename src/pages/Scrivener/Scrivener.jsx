@@ -1,18 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Header from '../../components/Header/Header.jsx';
+import LeftPaper from '../../components/LeftPaper/LeftPaper.jsx';
 import RightPaper from '../../components/RightPaper/RightPaper.jsx';
 
 const styles = {
-  root: {
-    height: '100vh',
+  header: {
+    height: '7%',
+  },
+  paperContainer: {
+    height: '93%',
     display: 'flex',
   },
   leftPaper: {
     flexGrow: 1,
+    overflowY: 'auto',
+    maxWidth: 300,
   },
   rightPaper: {
-    flexGrow: 5,
+    flexGrow: 3,
+    overflowY: 'auto',
   },
 };
 
@@ -22,8 +30,13 @@ class Scrivener extends React.Component {
 
     return (
       <>
-        <div className={classes.root}>
-          <div className={classes.leftPaper}>dasd</div>
+        <div className={classes.header}>
+          <Header />
+        </div>
+        <div className={classes.paperContainer}>
+          <div className={classes.leftPaper}>
+            <LeftPaper />
+          </div>
           <div className={classes.rightPaper}>
             <RightPaper />
           </div>

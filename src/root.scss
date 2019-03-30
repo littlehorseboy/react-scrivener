@@ -1,4 +1,9 @@
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   font-family: system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -13,4 +18,8 @@ body {
     "Segoe UI Emoji",
     "Segoe UI Symbol",
     "Noto Color Emoji";
+}
+
+#app {
+  height: 100%;
 }

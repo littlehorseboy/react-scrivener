@@ -1,5 +1,12 @@
+html {
+  height: 100%; }
+
 body {
+  height: 100%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, Microsoft JhengHei, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+
+#app {
+  height: 100%; }
 
 /*!
  * Quill Editor v1.3.6
