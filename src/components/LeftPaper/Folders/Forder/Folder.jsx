@@ -12,6 +12,13 @@ import FolderIcon from '@material-ui/icons/Folder';
 import File from '../File/File.jsx';
 
 const styles = theme => ({
+  listItem: {
+    paddingTop: theme.spacing.unit / 2,
+    paddingBottom: theme.spacing.unit / 2,
+  },
+  listItemText: {
+    paddingLeft: 0,
+  },
   nested: {
     paddingLeft: theme.spacing.unit * 4,
   },
@@ -36,11 +43,15 @@ class Folder extends React.Component {
     return (
       <>
         <React.Fragment key={this.props.folder.id}>
-          <ListItem button onClick={this.handleClick}>
+          <ListItem button onClick={this.handleClick} className={classes.listItem}>
             <ListItemIcon>
               <FolderIcon />
             </ListItemIcon>
-            <ListItemText inset primary={this.props.folder.title} />
+            <ListItemText
+              inset
+              primary={this.props.folder.title}
+              className={classes.listItemText}
+            />
             {this.state.open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={this.state.open} timeout="auto" unmountOnExit>

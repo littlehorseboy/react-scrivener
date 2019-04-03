@@ -8,8 +8,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
 const styles = theme => ({
-  nested: {
-    paddingLeft: theme.spacing.unit * 4,
+  listItem: {
+    paddingTop: theme.spacing.unit / 2,
+    paddingBottom: theme.spacing.unit / 2,
+  },
+  listItemText: {
+    paddingLeft: 0,
   },
 });
 
@@ -40,21 +44,21 @@ class File extends React.Component {
   }
 
   render() {
-    // const { classes } = this.props;
+    const { classes } = this.props;
 
     return (
-      <ListItem button onClick={this.handleClick}>
+      <ListItem button onClick={this.handleClick} className={classes.listItem}>
         <ListItemIcon>
           <InsertDriveFileIcon />
         </ListItemIcon>
-        <ListItemText inset primary={this.props.file.title} />
+        <ListItemText inset primary={this.props.file.title} className={classes.listItemText} />
       </ListItem>
     );
   }
 }
 
 File.propTypes = {
-  // classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
   editor: PropTypes.object.isRequired,
   file: PropTypes.object.isRequired,
 };

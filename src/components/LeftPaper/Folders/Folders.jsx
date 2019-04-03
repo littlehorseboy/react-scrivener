@@ -11,6 +11,9 @@ const styles = theme => ({
   list: {
     width: '100%',
   },
+  listSubheader: {
+    lineHeight: '24px',
+  },
   nested: {
     paddingLeft: theme.spacing.unit * 4,
   },
@@ -67,7 +70,7 @@ class Folders extends React.Component {
       <>
         <List
           component="nav"
-          subheader={<ListSubheader component="div">Binder</ListSubheader>}
+          subheader={<ListSubheader component="div" className={classes.listSubheader}>Binder</ListSubheader>}
           className={classes.list}
           disablePadding
         >
