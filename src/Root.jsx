@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import blue from '@material-ui/core/colors/blue';
+import teal from '@material-ui/core/colors/teal';
 import './root.scss';
 import 'core-js/features/promise';
 import 'core-js/features/array/find';
@@ -16,6 +17,9 @@ import store from './reducers/configureStore';
 const theme = createMuiTheme({
   palette: {
     primary: blue,
+    secondary: {
+      main: teal[400],
+    },
   },
   typography: {
     useNextVariants: true,
