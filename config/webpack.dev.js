@@ -16,8 +16,8 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
-      CORS_URL: JSON.stringify('https://cors-anywhere.herokuapp.com/'),
-      FETCH_URL: JSON.stringify(''),
+      CORS_URL: JSON.stringify('https://cors-anywhere.herokuapp.com'),
+      FETCH_URL: JSON.stringify('http://localhost:3456'),
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',

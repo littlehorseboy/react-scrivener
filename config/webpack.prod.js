@@ -14,7 +14,7 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
-      CORS_URL: JSON.stringify('https://cors-anywhere.herokuapp.com/'),
+      CORS_URL: JSON.stringify('https://cors-anywhere.herokuapp.com'),
       FETCH_URL: JSON.stringify(''),
     }),
     new CleanWebpackPlugin(),
