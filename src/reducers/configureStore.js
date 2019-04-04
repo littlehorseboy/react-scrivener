@@ -1,8 +1,10 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
+import loginReducer from './login';
 import scrivenerReducer from './scrivener';
 
 const rootReducer = combineReducers({
+  loginReducer,
   scrivenerReducer,
 });
 
