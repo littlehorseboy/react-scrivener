@@ -36,7 +36,7 @@ class LoginSubmitButton extends React.Component {
   chipShowSuccess() {
     this.setState({
       chipSlideShow: true,
-      chipLabel: '登入成功 即將跳轉至 books 頁面。',
+      chipLabel: '登入成功，即將跳轉至 books 頁面。',
       chipErrorStatus: false,
     });
   }

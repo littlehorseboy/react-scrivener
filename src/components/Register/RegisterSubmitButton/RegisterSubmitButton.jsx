@@ -22,7 +22,7 @@ const styles = theme => ({
   },
 });
 
-class LoginSubmitButton extends React.Component {
+class RegisterSubmitButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +36,7 @@ class LoginSubmitButton extends React.Component {
   chipShowSuccess() {
     this.setState({
       chipSlideShow: true,
-      chipLabel: '登入成功 即將跳轉頁面。',
+      chipLabel: '註冊成功，即將跳轉至 books 頁面。',
       chipErrorStatus: false,
     });
   }
@@ -61,19 +61,20 @@ class LoginSubmitButton extends React.Component {
 
     Axios({
       method: 'POST',
-      url: `${FETCH_URL}/api/userlogin`,
+      url: `${FETCH_URL}/api/userregiter`,
       data: {
         account: this.props.account,
         password: this.props.password,
+        email: this.props.email,
       },
     }).then((response) => {
-      if (response.data === 1) {
+      if (response.data !== 'repeat' && response.data.code !== 'ERR_ASSERTION') {
         this.chipShowSuccess();
         setTimeout(() => {
-          this.props.loginSuccessful();
+          this.props.loginSuccessful(response.data);
         }, 1500);
       } else {
-        this.chipShowError();
+        this.chipShowError('此帳號已被使用');
       }
     }).catch((error) => {
       this.chipShowError(error.message);
@@ -110,12 +111,13 @@ class LoginSubmitButton extends React.Component {
   }
 }
 
-LoginSubmitButton.propTypes = {
+RegisterSubmitButton.propTypes = {
   classes: PropTypes.object.isRequired,
   account: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
   loadingOverlayShow: PropTypes.func.isRequired,
   loginSuccessful: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(LoginSubmitButton);
+export default withStyles(styles)(RegisterSubmitButton);

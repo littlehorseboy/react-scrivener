@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import LockOutlined from '@material-ui/icons/LockOutlined';
-import LoginSubmitButton from '../../components/Register/LoginSubmitButton/LoginSubmitButton.jsx';
+import RegisterSubmitButton from '../../components/Register/RegisterSubmitButton/RegisterSubmitButton.jsx';
 import { login } from '../../actions/login';
 
 const styles = theme => ({
@@ -98,8 +98,8 @@ class Login extends React.Component {
     });
   }
 
-  loginSuccessful() {
-    this.props.login(true);
+  loginSuccessful(userInfo) {
+    this.props.login(userInfo);
     this.setState({
       redirectToReferrer: true,
     });
@@ -151,16 +151,17 @@ class Login extends React.Component {
                 fullWidth
                 label="電子信箱"
                 className={classes.textField}
-                value={this.state.account}
+                value={this.state.email}
                 onChange={this.handleChange('email')}
                 margin="normal"
               />
             </div>
 
             <div className={classes.buttonRow}>
-              <LoginSubmitButton
+              <RegisterSubmitButton
                 account={this.state.account}
                 password={this.state.password}
+                email={this.state.email}
                 loadingOverlayShow={this.loadingOverlayShow}
                 loginSuccessful={this.loginSuccessful}
               />
