@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import Quill from 'quill';
-import { addScrivener } from '../../../actions/scrivener';
+import { addScrivener } from '../../../../actions/scrivener';
 
 const styles = {
   editor: {
