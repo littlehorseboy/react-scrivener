@@ -1,17 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
+import Slide from '@material-ui/core/Slide';
+import DoneIcon from '@material-ui/icons/Done';
 
 /* global FETCH_URL */
 
-class Login extends React.Component {
+const styles = theme => ({
+  chipContainer: {
+    textAlign: 'center',
+    marginTop: theme.spacing.unit,
+  },
+  chip: {
+    '&.error': {
+      backgroundColor: theme.palette.error.main,
+    },
+  },
+});
+
+class LoginSubmitButton extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      chipSlideShow: false,
+      chipLabel: '',
+      chipErrorStatus: false,
+    };
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
   }
 
+  chipShowSuccess() {
+    this.setState({
+      chipSlideShow: true,
+      chipLabel: '登入成功 即將跳轉頁面。',
+      chipErrorStatus: false,
+    });
+  }
+
+  chipShowError() {
+    this.setState({
+      chipSlideShow: true,
+      chipLabel: '您的帳號或密碼不正確。',
+      chipErrorStatus: true,
+    });
+  }
+
+  chipHide() {
+    this.setState({
+      chipSlideShow: false,
+    });
+  }
+
   handleSubmitClick() {
+    this.chipHide();
     this.props.loadingOverlayShow(true);
 
     Axios({
@@ -23,11 +68,12 @@ class Login extends React.Component {
       },
     }).then((response) => {
       if (response.data === 1) {
+        this.chipShowSuccess();
         setTimeout(() => {
           this.props.loginSuccessful();
-        }, 1000);
+        }, 1500);
       } else {
-        alert('無此帳號或密碼');
+        this.chipShowError();
       }
     }).catch((error) => {
       console.error(error);
@@ -37,24 +83,39 @@ class Login extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <Button
-        fullWidth
-        color="secondary"
-        variant="contained"
-        onClick={this.handleSubmitClick}
-      >
-        登入
-      </Button>
+      <>
+        <Button
+          fullWidth
+          color="secondary"
+          variant="contained"
+          onClick={this.handleSubmitClick}
+        >
+          登入
+        </Button>
+        <Slide direction="up" in={this.state.chipSlideShow} mountOnEnter unmountOnExit>
+          <div className={classes.chipContainer}>
+            <Chip
+              label={this.state.chipLabel}
+              color="primary"
+              className={classNames(classes.chip, { error: this.state.chipErrorStatus })}
+              onDelete={() => { }}
+              deleteIcon={!this.state.chipErrorStatus ? <DoneIcon /> : null}
+            />
+          </div>
+        </Slide>
+      </>
     );
   }
 }
 
-Login.propTypes = {
+LoginSubmitButton.propTypes = {
+  classes: PropTypes.object.isRequired,
   account: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   loadingOverlayShow: PropTypes.func.isRequired,
   loginSuccessful: PropTypes.func.isRequired,
 };
 
-export default Login;
+export default withStyles(styles)(LoginSubmitButton);

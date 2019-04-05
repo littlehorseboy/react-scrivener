@@ -17,8 +17,8 @@ import { login } from '../../actions/login';
 
 const styles = theme => ({
   root: {
-    width: '100vw',
-    height: '100vh',
+    width: '100%',
+    height: '100%',
     backgroundColor: '#4ecdc4',
   },
   paperContainer: {
@@ -45,9 +45,6 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
-    '& > label': {
-      fontFamily: 'system-ui, -apple-system, "Roboto", "Helvetica", "Arial", sans-serif',
-    },
   },
   icon: {
     color: '#4ecdc4',
@@ -55,9 +52,6 @@ const styles = theme => ({
   },
   checkboxRow: {
     margin: theme.spacing.unit * 2,
-    '& > label > span': {
-      fontFamily: 'system-ui, -apple-system, "Roboto", "Helvetica", "Arial", sans-serif',
-    },
   },
   buttonRow: {
     margin: theme.spacing.unit * 2,
@@ -66,9 +60,6 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     margin: theme.spacing.unit * 2,
-    '& > button > span': {
-      fontFamily: 'system-ui, -apple-system, "Roboto", "Helvetica", "Arial", sans-serif',
-    },
   },
   loadingOverlay: {
     display: 'flex',
@@ -197,7 +188,7 @@ class Login extends React.Component {
               />
             </div>
 
-            <div className={classes.bottomRow}>
+            <div className={classes.buttonRow}>
               <LoginSubmitButton
                 account={this.state.account}
                 password={this.state.password}

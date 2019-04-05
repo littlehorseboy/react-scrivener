@@ -4,6 +4,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import blue from '@material-ui/core/colors/blue';
 import teal from '@material-ui/core/colors/teal';
+import lightGreen from '@material-ui/core/colors/lightGreen';
 import './root.scss';
 import 'core-js/features/promise';
 import 'core-js/features/array/find';
@@ -20,9 +21,11 @@ const theme = createMuiTheme({
     secondary: {
       main: teal[400],
     },
+    lightGreen,
   },
   typography: {
     useNextVariants: true,
+    fontFamily: 'system-ui, -apple-system, "Roboto", "Helvetica", "Arial", sans-serif',
   },
   zIndex: {
     loading: 1600,
