@@ -36,7 +36,7 @@ class LoginSubmitButton extends React.Component {
   chipShowSuccess() {
     this.setState({
       chipSlideShow: true,
-      chipLabel: '登入成功 即將跳轉至 books 頁面。',
+      chipLabel: '登入成功 即將跳轉頁面。',
       chipErrorStatus: false,
     });
   }
@@ -92,7 +92,7 @@ class LoginSubmitButton extends React.Component {
           variant="contained"
           onClick={this.handleSubmitClick}
         >
-          登入
+          註冊
         </Button>
         <Slide direction="up" in={this.state.chipSlideShow} mountOnEnter unmountOnExit>
           <div className={classes.chipContainer}>

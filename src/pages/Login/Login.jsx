@@ -10,6 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import LockOutlined from '@material-ui/icons/LockOutlined';
 import LoginSubmitButton from '../../components/Login/LoginSubmitButton/LoginSubmitButton.jsx';
@@ -29,7 +30,7 @@ const styles = theme => ({
   },
   paper: {
     width: 'calc(100% - 24px)',
-    padding: '8px 8px 0 8px',
+    padding: '24px 8px 0 8px',
     position: 'relative',
   },
   '@media (min-width: 1024px)': {
@@ -142,6 +143,9 @@ class Login extends React.Component {
       <div className={classes.root}>
         <div className={classes.paperContainer}>
           <Paper className={classes.paper}>
+            <Typography variant="h5" align="center">
+              Sign In
+            </Typography>
             <div className={classes.textFieldRow}>
               <AccountCircleOutlinedIcon className={classes.icon} color="secondary" />
               <TextField
@@ -192,7 +196,6 @@ class Login extends React.Component {
             <div className={classes.bottomRow}>
               <Button
                 color="primary"
-                className={classes.button}
                 component={Link}
                 to="/register"
               >
@@ -200,7 +203,6 @@ class Login extends React.Component {
               </Button>
               <Button
                 color="primary"
-                className={classes.button}
                 onClick={this.handleForgotPasswordClick}
               >
                 {this.state.forgotPassword ? '我也沒辦法幫你想' : '忘記密碼'}

@@ -1,18 +1,17 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import LockOutlined from '@material-ui/icons/LockOutlined';
-import LoginSubmitButton from '../../components/Login/LoginSubmitButton/LoginSubmitButton.jsx';
+import LoginSubmitButton from '../../components/Register/LoginSubmitButton/LoginSubmitButton.jsx';
 import { login } from '../../actions/login';
 
 const styles = theme => ({
@@ -29,7 +28,7 @@ const styles = theme => ({
   },
   paper: {
     width: 'calc(100% - 24px)',
-    padding: '8px 8px 0 8px',
+    padding: '24px 8px 0 8px',
     position: 'relative',
   },
   '@media (min-width: 1024px)': {
@@ -50,15 +49,7 @@ const styles = theme => ({
     color: '#4ecdc4',
     fontSize: 35,
   },
-  checkboxRow: {
-    margin: theme.spacing.unit * 2,
-  },
   buttonRow: {
-    margin: theme.spacing.unit * 2,
-  },
-  bottomRow: {
-    display: 'flex',
-    justifyContent: 'space-between',
     margin: theme.spacing.unit * 2,
   },
   loadingOverlay: {
@@ -85,12 +76,10 @@ class Login extends React.Component {
 
       account: 'littlehorseboy',
       password: 'test',
-      remenberMe: false,
-      forgotPassword: false,
+      email: 'littlehorseboy@gmail.com',
 
       loading: false,
     };
-    this.handleForgotPasswordClick = this.handleForgotPasswordClick.bind(this);
     this.loadingOverlayShow = this.loadingOverlayShow.bind(this);
     this.loginSuccessful = this.loginSuccessful.bind(this);
   }
@@ -101,20 +90,6 @@ class Login extends React.Component {
         [name]: event.target.value,
       });
     };
-  }
-
-  handleCheckChange(name) {
-    return (event) => {
-      this.setState({
-        [name]: event.target.checked,
-      });
-    };
-  }
-
-  handleForgotPasswordClick() {
-    this.setState({
-      forgotPassword: !this.state.forgotPassword,
-    });
   }
 
   loadingOverlayShow(bool) {
@@ -142,6 +117,9 @@ class Login extends React.Component {
       <div className={classes.root}>
         <div className={classes.paperContainer}>
           <Paper className={classes.paper}>
+            <Typography variant="h5" align="center">
+              Sign Up
+            </Typography>
             <div className={classes.textFieldRow}>
               <AccountCircleOutlinedIcon className={classes.icon} color="secondary" />
               <TextField
@@ -168,27 +146,14 @@ class Login extends React.Component {
             </div>
 
             <div className={classes.textFieldRow}>
-              <AccountCircleOutlinedIcon className={classes.icon} color="secondary" />
+              <EmailOutlinedIcon className={classes.icon} color="secondary" />
               <TextField
                 fullWidth
                 label="電子信箱"
                 className={classes.textField}
                 value={this.state.account}
-                onChange={this.handleChange('account')}
+                onChange={this.handleChange('email')}
                 margin="normal"
-              />
-            </div>
-
-            <div className={classes.checkboxRow}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.remenberMe}
-                    onChange={this.handleCheckChange('remenberMe')}
-                    color="secondary"
-                  />
-                }
-                label={this.state.remenberMe ? '但我其實記不住' : '記住我'}
               />
             </div>
 
@@ -199,24 +164,6 @@ class Login extends React.Component {
                 loadingOverlayShow={this.loadingOverlayShow}
                 loginSuccessful={this.loginSuccessful}
               />
-            </div>
-
-            <div className={classes.bottomRow}>
-              <Button
-                color="primary"
-                className={classes.button}
-                component={Link}
-                to="/register"
-              >
-                註冊帳號
-              </Button>
-              <Button
-                color="primary"
-                className={classes.button}
-                onClick={this.handleForgotPasswordClick}
-              >
-                {this.state.forgotPassword ? '我也沒辦法幫你想' : '忘記密碼'}
-              </Button>
             </div>
 
             <div className={classNames(classes.loadingOverlay, { hide: !this.state.loading })}>
