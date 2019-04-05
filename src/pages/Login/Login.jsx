@@ -2,14 +2,17 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import LockOutlined from '@material-ui/icons/LockOutlined';
+import LoginSubmitButton from '../../components/Login/LoginSubmitButton/LoginSubmitButton.jsx';
 import { login } from '../../actions/login';
 
 const styles = theme => ({
@@ -27,6 +30,7 @@ const styles = theme => ({
   paper: {
     width: 'calc(100% - 24px)',
     padding: '8px 8px 0 8px',
+    position: 'relative',
   },
   '@media (min-width: 1024px)': {
     paper: {
@@ -66,6 +70,20 @@ const styles = theme => ({
       fontFamily: 'system-ui, -apple-system, "Roboto", "Helvetica", "Arial", sans-serif',
     },
   },
+  loadingOverlay: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    '&.hide': {
+      display: 'none',
+    },
+  },
 });
 
 class Login extends React.Component {
@@ -73,15 +91,19 @@ class Login extends React.Component {
     super(props);
     this.state = {
       redirectToReferrer: false,
+
       account: 'littlehorseboy',
       password: 'test',
       remenberMe: false,
       register: false,
       forgotPassword: false,
+
+      loading: false,
     };
-    this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleRegisterClick = this.handleRegisterClick.bind(this);
     this.handleForgotPasswordClick = this.handleForgotPasswordClick.bind(this);
+    this.loadingOverlayShow = this.loadingOverlayShow.bind(this);
+    this.loginSuccessful = this.loginSuccessful.bind(this);
   }
 
   handleChange(name) {
@@ -100,13 +122,6 @@ class Login extends React.Component {
     };
   }
 
-  handleSubmitClick() {
-    this.props.login(true);
-    this.setState({
-      redirectToReferrer: true,
-    });
-  }
-
   handleRegisterClick() {
     this.setState({
       register: !this.state.register,
@@ -116,6 +131,19 @@ class Login extends React.Component {
   handleForgotPasswordClick() {
     this.setState({
       forgotPassword: !this.state.forgotPassword,
+    });
+  }
+
+  loadingOverlayShow(bool) {
+    this.setState({
+      loading: bool,
+    });
+  }
+
+  loginSuccessful() {
+    this.props.login(true);
+    this.setState({
+      redirectToReferrer: true,
     });
   }
 
@@ -170,14 +198,12 @@ class Login extends React.Component {
             </div>
 
             <div className={classes.bottomRow}>
-              <Button
-                fullWidth
-                color="secondary"
-                variant="contained"
-                onClick={this.handleSubmitClick}
-              >
-                登入
-              </Button>
+              <LoginSubmitButton
+                account={this.state.account}
+                password={this.state.password}
+                loadingOverlayShow={this.loadingOverlayShow}
+                loginSuccessful={this.loginSuccessful}
+              />
             </div>
 
             <div className={classes.bottomRow}>
@@ -195,6 +221,10 @@ class Login extends React.Component {
               >
                 {this.state.forgotPassword ? '我也沒辦法幫你想' : '忘記密碼'}
               </Button>
+            </div>
+
+            <div className={classNames(classes.loadingOverlay, { hide: !this.state.loading })}>
+              <CircularProgress />
             </div>
           </Paper>
         </div>

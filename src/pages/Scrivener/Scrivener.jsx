@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Header from '../../components/Header/Header.jsx';
-import LeftPaper from '../../components/LeftPaper/LeftPaper.jsx';
-import RightPaper from '../../components/RightPaper/RightPaper.jsx';
+import Header from '../../components/Scrivener/Header/Header.jsx';
+import LeftPaper from '../../components/Scrivener/LeftPaper/LeftPaper.jsx';
+import RightPaper from '../../components/Scrivener/RightPaper/RightPaper.jsx';
 
 const styles = {
   header: {
