@@ -17,7 +17,7 @@ const styles = theme => ({
   },
   chip: {
     '&.error': {
-      backgroundColor: theme.palette.error.main,
+      backgroundColor: '#ff4f5f',
     },
   },
 });
@@ -41,10 +41,10 @@ class LoginSubmitButton extends React.Component {
     });
   }
 
-  chipShowError() {
+  chipShowError(label = '您的帳號或密碼不正確。') {
     this.setState({
       chipSlideShow: true,
-      chipLabel: '您的帳號或密碼不正確。',
+      chipLabel: label,
       chipErrorStatus: true,
     });
   }
@@ -76,7 +76,7 @@ class LoginSubmitButton extends React.Component {
         this.chipShowError();
       }
     }).catch((error) => {
-      console.error(error);
+      this.chipShowError(error.message);
     }).then(() => {
       this.props.loadingOverlayShow(false);
     });
