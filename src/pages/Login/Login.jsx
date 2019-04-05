@@ -124,8 +124,8 @@ class Login extends React.Component {
     });
   }
 
-  loginSuccessful() {
-    this.props.login(true);
+  loginSuccessful(userInfo) {
+    this.props.login(userInfo);
     this.setState({
       redirectToReferrer: true,
     });
@@ -227,8 +227,8 @@ Login.propTypes = {
 
 // connect
 const mapDispatchToProps = dispatch => ({
-  login(isAuthenticated) {
-    dispatch(login(isAuthenticated));
+  login(userInfo) {
+    dispatch(login(userInfo));
   },
 });
 

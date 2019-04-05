@@ -1,6 +1,8 @@
 export const LOGIN = 'LOGIN';
 
-export const login = isAuthenticated => ({
+export const login = userInfo => ({
   type: LOGIN,
-  payload: isAuthenticated,
+  payload: {
+    userInfo,
+  },
 });

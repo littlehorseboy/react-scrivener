@@ -2,6 +2,7 @@ import { LOGIN } from '../actions/login';
 
 const initState = {
   isAuthenticated: false,
+  userInfo: {},
 };
 
 const loginReducer = (state = initState, action) => {
@@ -9,7 +10,8 @@ const loginReducer = (state = initState, action) => {
     case LOGIN:
       return {
         ...state,
-        isAuthenticated: action.payload,
+        isAuthenticated: true,
+        userInfo: action.payload.userInfo,
       };
     default:
       return state;

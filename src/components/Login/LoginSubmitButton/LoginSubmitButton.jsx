@@ -67,10 +67,10 @@ class LoginSubmitButton extends React.Component {
         password: this.props.password,
       },
     }).then((response) => {
-      if (response.data === 1) {
+      if (response.data) {
         this.chipShowSuccess();
         setTimeout(() => {
-          this.props.loginSuccessful();
+          this.props.loginSuccessful(response.data);
         }, 1500);
       } else {
         this.chipShowError();
