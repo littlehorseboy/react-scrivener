@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
@@ -86,12 +86,10 @@ class Login extends React.Component {
       account: 'littlehorseboy',
       password: 'test',
       remenberMe: false,
-      register: false,
       forgotPassword: false,
 
       loading: false,
     };
-    this.handleRegisterClick = this.handleRegisterClick.bind(this);
     this.handleForgotPasswordClick = this.handleForgotPasswordClick.bind(this);
     this.loadingOverlayShow = this.loadingOverlayShow.bind(this);
     this.loginSuccessful = this.loginSuccessful.bind(this);
@@ -111,12 +109,6 @@ class Login extends React.Component {
         [name]: event.target.checked,
       });
     };
-  }
-
-  handleRegisterClick() {
-    this.setState({
-      register: !this.state.register,
-    });
   }
 
   handleForgotPasswordClick() {
@@ -201,9 +193,10 @@ class Login extends React.Component {
               <Button
                 color="primary"
                 className={classes.button}
-                onClick={this.handleRegisterClick}
+                component={Link}
+                to="/register"
               >
-                {this.state.register ? '還沒實裝' : '註冊帳號'}
+                註冊帳號
               </Button>
               <Button
                 color="primary"

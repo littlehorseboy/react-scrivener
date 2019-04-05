@@ -3,6 +3,7 @@ import { HashRouter, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PrivateRoute from './PrivateRoute.jsx';
 import Login from '../pages/Login/Login.jsx';
+import Register from '../pages/Register/Register.jsx';
 import Scrivener from '../pages/Scrivener/Scrivener.jsx';
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
@@ -40,7 +41,7 @@ class Router extends React.Component {
 
         <PrivateRoute exact path='/' component={Scrivener} />
         <Route path='/login' component={Login} />
-        <Route path='/about' component={Scrivener} />
+        <Route path='/register' component={Register} />
         <Route path='/hello/:userName' component={Hello} />
         <Route path='/hey/:userName' render={props => <h1>Hey! {props.match.params.userName}</h1>} />
       </HashRouter>
