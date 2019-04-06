@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 
 class SaveContentsBtn extends React.Component {
   constructor(props) {
@@ -15,7 +17,10 @@ class SaveContentsBtn extends React.Component {
   render() {
     return (
       <>
-          <button onClick={this.handleClickSubmit}>儲存</button>
+        <Button variant="outlined" size="small" color="secondary" onClick={this.handleClickSubmit}>
+          <SaveOutlinedIcon />
+          儲存
+        </Button>
       </>
     );
   }
