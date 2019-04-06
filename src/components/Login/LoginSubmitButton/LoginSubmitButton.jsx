@@ -57,6 +57,19 @@ class LoginSubmitButton extends React.Component {
 
   handleSubmitClick() {
     this.chipHide();
+
+    // validation
+    if (!this.props.account) {
+      this.chipShowError('請輸入帳號');
+      return;
+    }
+
+    if (!this.props.password) {
+      this.chipShowError('請輸入密碼');
+      return;
+    }
+
+    // request login
     this.props.loadingOverlayShow(true);
 
     Axios({
