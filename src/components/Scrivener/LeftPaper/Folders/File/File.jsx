@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -47,7 +48,13 @@ class File extends React.Component {
     const { classes } = this.props;
 
     return (
-      <ListItem button onClick={this.handleClick} className={classes.listItem}>
+      <ListItem
+        button
+        onClick={this.handleClick}
+        className={classes.listItem}
+        component={Link}
+        to={`/book/${this.props.file.id}`}
+      >
         <ListItemIcon>
           <InsertDriveFileIcon />
         </ListItemIcon>
