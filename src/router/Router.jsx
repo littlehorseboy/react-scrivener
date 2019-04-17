@@ -40,7 +40,7 @@ class Router extends React.Component {
         <hr /> */}
 
         <PrivateRoute exact path='/' component={Scrivener} />
-        <Route path='/book/:id' component={Scrivener} />
+        <Route path='/book/:file_id' component={Scrivener} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route path='/hello/:userName' component={Hello} />

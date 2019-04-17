@@ -51,7 +51,7 @@ class Scrivener extends React.Component {
             <LeftPaper />
           </div>
           <div className={classes.rightPaper}>
-            <RightPaper />
+            <RightPaper fileId={this.props.match.params.file_id} />
           </div>
         </div>
       </div>
@@ -61,6 +61,9 @@ class Scrivener extends React.Component {
 
 Scrivener.propTypes = {
   classes: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
 export default withStyles(styles)(Scrivener);

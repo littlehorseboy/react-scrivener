@@ -6,6 +6,7 @@ import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import Quill from 'quill';
 import { addScrivener } from '../../../../actions/scrivener';
+import { fetchFile } from '../../../../actions/file';
 
 const styles = {
   editor: {
@@ -50,7 +51,10 @@ class ScrivenerWidget extends React.Component {
 
     return (
       <>
-        <div ref={this.editorRef} className={classes.editor}></div>
+        <div ref={this.editorRef} className={classes.editor}>
+          {JSON.stringify(this.props.file)}
+        </div>
+        <button onClick={() => this.props.fetchFile('redux-observable')}></button>
       </>
     );
   }
@@ -58,18 +62,27 @@ class ScrivenerWidget extends React.Component {
 
 ScrivenerWidget.propTypes = {
   classes: PropTypes.object.isRequired,
+  file: PropTypes.object.isRequired,
   addScrivener: PropTypes.func.isRequired,
+  fetchFile: PropTypes.func.isRequired,
 };
 
 // connect
+const mapStateToProps = state => ({
+  file: state.fileReducer.file,
+});
+
 const mapDispatchToProps = dispatch => ({
   addScrivener(editor) {
     dispatch(addScrivener(editor));
   },
+  fetchFile(fileId) {
+    dispatch(fetchFile(fileId));
+  },
 });
 
 const ConnectScrivenerWidget = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(ScrivenerWidget);
 
