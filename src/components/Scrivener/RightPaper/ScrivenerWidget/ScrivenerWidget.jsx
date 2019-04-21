@@ -58,6 +58,8 @@ class ScrivenerWidget extends React.Component {
     if (this.state.editor) {
       if (this.props.file.content) {
         this.state.editor.setContents(JSON.parse(this.props.file.content.replace(/\n/g, '\\n')));
+      } else {
+        this.state.editor.setContents('');
       }
     }
 

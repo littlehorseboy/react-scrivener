@@ -2,6 +2,8 @@ import Axios from 'axios';
 import { delay, mergeMap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 
+/* global FETCH_URL */
+
 export const FETCH_FILE = 'FETCH_FILE';
 export const FETCH_FILE_FULFILLED = 'FETCH_FILE_FULFILLED';
 
@@ -21,12 +23,12 @@ export const fileEpic = action$ => action$.pipe(
   mergeMap(
     action => Axios({
       method: 'get',
-      url: `https://api.github.com/users/${action.payload}`,
+      url: `${FETCH_URL}/api/file`,
+      params: {
+        fileId: action.payload,
+      },
     })
-      .then(response => fetchFileFulfilled({
-        fileId: '123',
-        content: '{"ops":[{"insert":"測試內容\n"}]}',
-      }))
+      .then(response => fetchFileFulfilled(response.data.fileId ? response.data : { content: '' }))
       .catch(error => console.error(error)),
   ),
 );
