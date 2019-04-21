@@ -37,7 +37,7 @@ class Header extends React.Component {
               <PlaylistAddCheckRoundedIcon />
               目錄管理
             </Button>
-            <SaveContentsBtn />
+            <SaveContentsBtn fileId={this.props.fileId} />
           </div>
         </div>
       </>
@@ -47,6 +47,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
+  fileId: PropTypes.string,
 };
 
 export default withStyles(styles)(Header);

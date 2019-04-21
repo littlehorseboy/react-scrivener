@@ -44,7 +44,7 @@ class Scrivener extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.header}>
-          <Header />
+          <Header fileId={this.props.match.params.file_id} />
         </div>
         <div className={classes.paperContainer}>
           <div className={classes.leftPaper}>

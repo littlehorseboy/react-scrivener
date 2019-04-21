@@ -11,7 +11,10 @@ class SaveContentsBtn extends React.Component {
   }
 
   handleClickSubmit() {
-    alert(JSON.stringify(this.props.editor.getContents()));
+    alert(JSON.stringify({
+      fileId: this.props.fileId ? this.props.fileId : '',
+      content: this.props.editor.getContents(),
+    }));
   }
 
   render() {
@@ -27,6 +30,7 @@ class SaveContentsBtn extends React.Component {
 }
 
 SaveContentsBtn.propTypes = {
+  fileId: PropTypes.string,
   editor: PropTypes.object.isRequired,
 };
 
