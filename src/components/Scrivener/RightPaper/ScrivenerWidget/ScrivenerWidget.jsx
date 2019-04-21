@@ -20,6 +20,9 @@ class ScrivenerWidget extends React.Component {
     super(props);
     this.toolbarRef = React.createRef();
     this.editorRef = React.createRef();
+    this.state = {
+      editor: null,
+    };
   }
 
   componentDidMount() {
@@ -43,17 +46,24 @@ class ScrivenerWidget extends React.Component {
       // debug: 'info',
     });
 
+    this.setState({
+      editor,
+    });
     this.props.addScrivener(editor);
   }
 
   render() {
     const { classes } = this.props;
 
+    if (this.state.editor) {
+      if (this.props.file.content) {
+        this.state.editor.setContents(JSON.parse(this.props.file.content.replace(/\n/g, '\\n')));
+      }
+    }
+
     return (
       <>
-        <div ref={this.editorRef} className={classes.editor}>
-          {JSON.stringify(this.props.file)}
-        </div>
+        <div ref={this.editorRef} className={classes.editor}></div>
         <button onClick={() => this.props.fetchFile('redux-observable')}></button>
       </>
     );

@@ -23,7 +23,10 @@ export const fileEpic = action$ => action$.pipe(
       method: 'get',
       url: `https://api.github.com/users/${action.payload}`,
     })
-      .then(response => fetchFileFulfilled(response.data))
+      .then(response => fetchFileFulfilled({
+        fileId: '123',
+        content: '{"ops":[{"insert":"測試內容\n"}]}',
+      }))
       .catch(error => console.error(error)),
   ),
 );

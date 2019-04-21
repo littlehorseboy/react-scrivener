@@ -7,6 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
+import { fetchFile } from '../../../../../actions/file';
 
 const styles = theme => ({
   listItem: {
@@ -38,7 +39,8 @@ class File extends React.Component {
   handleClick() {
     const content = contents.find(data => data.id === this.props.file.id);
     if (content) {
-      this.props.editor.setContents(JSON.parse(content.content.replace(/\n/g, '\\n')));
+      // this.props.editor.setContents(JSON.parse(content.content.replace(/\n/g, '\\n')));
+      this.props.fetchFile('redux-observable');
     } else {
       this.props.editor.setContents('');
     }
@@ -68,6 +70,7 @@ File.propTypes = {
   classes: PropTypes.object.isRequired,
   editor: PropTypes.object.isRequired,
   file: PropTypes.object.isRequired,
+  fetchFile: PropTypes.func.isRequired,
 };
 
 // connect
@@ -75,8 +78,15 @@ const mapStateToProps = state => ({
   editor: state.scrivenerReducer.editor,
 });
 
+const mapDispatchToProps = dispatch => ({
+  fetchFile(fileId) {
+    dispatch(fetchFile(fileId));
+  },
+});
+
 const ConnectFile = connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(File);
 
 export default withStyles(styles)(ConnectFile);
