@@ -73,7 +73,7 @@ class LoginSubmitButton extends React.Component {
     this.props.loadingOverlayShow(true);
 
     Axios({
-      method: 'POST',
+      method: 'post',
       url: `${FETCH_URL}/api/userlogin`,
       data: {
         account: this.props.account,

@@ -31,7 +31,7 @@ class Folders extends React.Component {
           title: '第2章',
           children: [
             { id: 'file-7ab1cab8-f3a3-4fc1-a10d-6e03', type: 'file', title: '第2章 - 第1話' },
-            { id: `file-${uuidv4()}`, type: 'file', title: '第2章 - 第2話' },
+            { id: 'file-7ab1cab8-f3a3-4fc1-a10d-6e03123', type: 'file', title: '第2章 - 第2話' },
           ],
         },
         { id: `file-${uuidv4()}`, type: 'file', title: '第3章 - 第1話' },

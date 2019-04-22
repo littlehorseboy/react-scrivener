@@ -78,7 +78,7 @@ class RegisterSubmitButton extends React.Component {
     this.props.loadingOverlayShow(true);
 
     Axios({
-      method: 'POST',
+      method: 'post',
       url: `${FETCH_URL}/api/userregiter`,
       data: {
         account: this.props.account,
