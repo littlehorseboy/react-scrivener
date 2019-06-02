@@ -6,7 +6,6 @@ import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import Quill from 'quill';
 import { addScrivener } from '../../../../actions/scrivener';
-import { fetchFile } from '../../../../actions/file';
 
 const styles = {
   editor: {
@@ -58,6 +57,10 @@ class ScrivenerWidget extends React.Component {
     if (this.state.editor) {
       if (this.props.file.content) {
         this.state.editor.setContents(this.props.file.content);
+      } else if (this.props.file.loading) {
+        this.state.editor.setContents({
+          ops: [{ insert: '讀取中，請稍後' }],
+        });
       } else {
         this.state.editor.setContents('');
       }
@@ -66,7 +69,6 @@ class ScrivenerWidget extends React.Component {
     return (
       <>
         <div ref={this.editorRef} className={classes.editor}></div>
-        <button onClick={() => this.props.fetchFile('redux-observable')}></button>
       </>
     );
   }
@@ -76,7 +78,6 @@ ScrivenerWidget.propTypes = {
   classes: PropTypes.object.isRequired,
   file: PropTypes.object.isRequired,
   addScrivener: PropTypes.func.isRequired,
-  fetchFile: PropTypes.func.isRequired,
 };
 
 // connect
@@ -87,9 +88,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addScrivener(editor) {
     dispatch(addScrivener(editor));
-  },
-  fetchFile(fileId) {
-    dispatch(fetchFile(fileId));
   },
 });
 

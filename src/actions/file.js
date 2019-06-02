@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { delay, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 
 /* global FETCH_URL */
@@ -19,7 +19,6 @@ export const fetchFileFulfilled = payload => ({
 
 export const fileEpic = action$ => action$.pipe(
   ofType(FETCH_FILE),
-  delay(1000),
   mergeMap(
     action => Axios({
       method: 'get',
